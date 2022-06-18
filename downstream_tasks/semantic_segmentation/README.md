@@ -58,9 +58,10 @@ Please note that, the evaluation will be automatically conducted during training
 
 | Backbone | #Pretrained Epoch | mIoU | Config                                   |
 | -------- | ----------------- | ---- | ---------------------------------------- |
-| ViT-B    | 300               | 48.2 | [3e-4](./configs_local/cae/upernet/upernet_cae_base_12_512_slide_160k_ade20k_pt_3e-4.py) |
-| ViT-B    | 800               | 49.8 | [2e-4](./configs_local/cae/upernet/upernet_cae_base_12_512_slide_160k_ade20k_pt_2e-4.py) |
-| ViT-B    | 1600              | 50.1 | [1e-4](./configs_local/cae/upernet/upernet_cae_base_12_512_slide_160k_ade20k_pt_1e-4.py) |
+| ViT-B    | 300               | 48.1 | [3e-4](./configs_local/cae/upernet/upernet_cae_base_12_512_slide_160k_ade20k_pt_3e-4.py) |
+| ViT-B    | 800               | 49.7 | [2e-4](./configs_local/cae/upernet/upernet_cae_base_12_512_slide_160k_ade20k_pt_2e-4.py) |
+| ViT-B    | 1600              | 50.3 | [1e-4](./configs_local/cae/upernet/upernet_cae_base_12_512_slide_160k_ade20k_pt_1e-4.py) |
+| ViT-L    | 1600              | 54.6 | [5e-5](./configs_local/cae/upernet/upernet_cae_large_24_512_slide_160k_ade20k_pt_decay095_5e-5_dp015.py) |
 
 We find that, if the pretrained model is better, a smaller learning rate is more suitable. However, different learning rates will not lead to significantly different results. For example, 800-epoch pretrained ViT-B could obtain 49.6 mIoU (averaged from two runs) with lr=4e-4.
 

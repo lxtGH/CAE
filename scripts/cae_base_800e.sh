@@ -65,3 +65,30 @@ OMP_NUM_THREADS=1 python -m torch.distributed.launch \
     --disable_rel_pos_bias \
     --linear_type standard \
     --exp_name $my_name
+
+# ============================ attentive probing ============================
+DATA_PATH=/path/to/imagenet1k/
+MODEL_PATH=/path/to/pretrained/model
+
+OMP_NUM_THREADS=1 python -m torch.distributed.launch \
+    --nproc_per_node=8 \
+    --nnodes=$NNODES \
+    --node_rank=$RANK \
+    --master_addr=$ADDRESS \
+    --master_port=8899 \
+    tools/run_attentive.py \
+    --model cae_base_patch16_224 --data_path $DATA_PATH \
+    --finetune $MODEL_PATH \
+    --nb_classes 1000 --data_set IMNET --imagenet_default_mean_and_std \
+    --output_dir $OUTPUT_DIR --batch_size 256 --lr 0.4 --update_freq 1 \
+    --warmup_epochs 10 --epochs 90 \
+    --weight_decay 0 --smoothing 0.0 --layer_decay 1.0 --drop_path 0.0 \
+    --color_jitter 0.0 --mixup 0.0 --cutmix 0.0 --reprob 0.0 \
+    --opt sgd --momentum 0.9 \
+    --enable_linear_eval \
+    --use_cls \
+    --dist_eval \
+    --no_auto_resume \
+    --save_ckpt_freq 50 \
+    --linear_type attentive \
+    --exp_name $my_name

@@ -158,7 +158,7 @@ def get_args():
     parser.add_argument('--base_momentum', type=float, default=0, help='ema weight for the dual path network')
 
     # init func, borrowed from BEiT
-    parser.add_argument('--rescale_init', action='store_true', default=False, help='if true, the fix_init_weight() func will be activated')
+    parser.add_argument('--fix_init_weight', action='store_true', default=False, help='if true, the fix_init_weight() func will be activated')
 
 
     return parser.parse_args()

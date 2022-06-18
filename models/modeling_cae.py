@@ -54,7 +54,7 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
         trunc_normal_(self.mask_token, std=self.init_std)
 
         ### whether to use 'rescale' to init the weight, borrowed from beit.
-        if not args.rescale_init:
+        if not args.fix_init_weight:
             self.apply(self._init_weights)
         self._init_teacher()
         

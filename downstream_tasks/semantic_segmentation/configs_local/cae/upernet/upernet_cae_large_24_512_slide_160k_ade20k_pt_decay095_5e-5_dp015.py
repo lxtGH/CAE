@@ -21,32 +21,38 @@ model = dict(
         type='CAE',
         img_size=512,
         patch_size=16,
-        embed_dim=768,
-        depth=12,
-        num_heads=12,
+        embed_dim=1024,
+        depth=24,
+        num_heads=16,
         mlp_ratio=4,
         qkv_bias=True,
         use_abs_pos_emb=False,
         use_rel_pos_bias=True,
-        init_values=0.1,
-        drop_path_rate=0.1,
-        out_indices=[3, 5, 7, 11]
+        init_values=1e-5,
+        drop_path_rate=0.15,
+        out_indices=[7, 11, 15, 23],
     ),
     decode_head=dict(
-        in_channels=[768, 768, 768, 768],
+        in_channels=[1024, 1024, 1024, 1024],
         num_classes=150,
-        channels=768,
+        channels=1024,
     ),
     auxiliary_head=dict(
-        in_channels=768,
+        in_channels=1024,
         num_classes=150
     ), 
     test_cfg = dict(mode='slide', crop_size=crop_size, stride=(341, 341))
 )
 
-optimizer = dict(_delete_=True, type='AdamW', lr=4e-4, betas=(0.9, 0.999), weight_decay=0.05,
+# AdamW optimizer, no weight decay for position embedding & layer norm in backbone
+# optimizer = dict(_delete_=True, type='AdamW', lr=0.00006, betas=(0.9, 0.999), weight_decay=0.01,
+#                  paramwise_cfg=dict(custom_keys={'absolute_pos_embed': dict(decay_mult=0.),
+#                                                  'relative_position_bias_table': dict(decay_mult=0.),
+#                                                  'norm': dict(decay_mult=0.)}))
+
+optimizer = dict(_delete_=True, type='AdamW', lr=5e-5, betas=(0.9, 0.999), weight_decay=0.05,
                  constructor='LayerDecayOptimizerConstructor', 
-                 paramwise_cfg=dict(num_layers=12, layer_decay_rate=0.65))
+                 paramwise_cfg=dict(num_layers=24, layer_decay_rate=0.95))
 
 lr_config = dict(_delete_=True, policy='poly',
                  warmup='linear',
@@ -56,6 +62,10 @@ lr_config = dict(_delete_=True, policy='poly',
 
 # By default, models are trained on 8 GPUs with 2 images per GPU
 data=dict(samples_per_gpu=2)
+#img_norm_cfg = dict(
+#    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+#crop_size = (512, 512)
+## test_cfg = dict(mode='slide', crop_size=crop_size, stride=(341, 341))
 find_unused_parameters = True
 
 #test_pipeline = [
@@ -81,7 +91,7 @@ find_unused_parameters = True
 #)
 
 runner = dict(type='IterBasedRunnerAmp')
-checkpoint_config = dict(by_epoch=False, interval=8000)
+checkpoint_config = dict(by_epoch=False, interval=32000)
 
 # do not use mmdet version fp16
 fp16 = None

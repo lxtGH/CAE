@@ -99,23 +99,27 @@ Warmup epochs for 300/800/1600 epochs pretraining are 10/20/40.
 ## Results
 Here provides the results of CAE-base for these evaluation tasks:
 - Linear probing
-- Attentive probing (TODO)
+- Attentive probing
 - Fine-tuning
 - Semantic segmentation
 - Object detection and instance segmentation
 
-Pretrained weights will be available. *: from CAE paper.
+Pretrained weights are available ([Google Drive](https://drive.google.com/drive/folders/1wwhg7nj2GQuU9uthVuQLkEEXEjx90G7g?usp=sharing)). *: from CAE paper.
 
 | Model     | Pretraining data | #Epoch | Linear | Attentive | Fine-tuning | ADE Seg | COCO Det | COCO InstSeg |
 | --------- | ---------------- | ------ | ------ | --------- | ----------- | ------- | -------- | ------------ |
-| MAE-base* | ImageNet-1K      | 1600   | 67.8   | -         | 83.6        | 48.1    | 48.4     | 42.6         |
-| CAE-base  | ImageNet-1K      | 300    | 64.1   | -         | 83.6        | 48.2    | 48.5     | 42.7         |
-| CAE-base  | ImageNet-1K      | 800    | 68.5   | -         | 83.7        | 49.8    | 49.7     | 43.9         |
-| CAE-base  | ImageNet-1K      | 1600   | 70.2   | -         | 83.8        | 50.1    | 50.1     | 44.0         |
+| MAE-base* | ImageNet-1K      | 1600   | 67.8   | 74.2      | 83.6        | 48.1    | 48.4     | 42.6         |
+| CAE-base  | ImageNet-1K      | 300    | 64.5   | 74.0      | 83.6        | 48.1    | 48.3     | 42.7         |
+| CAE-base  | ImageNet-1K      | 800    | 68.9   | 75.9      | 83.8        | 49.7    | 49.9     | 43.9         |
+| CAE-base  | ImageNet-1K      | 1600   | 70.3   | 77.2      | 83.9        | 50.3    | 50.3     | 44.2         |
 
 
 ### Linear Probing
 - Please refer to [scripts/cae_base_800e.sh](scripts/cae_base_800e.sh) (32 GPUs).  
+
+### Attentive Probing
+
+- Please refer to [scripts/cae_base_800e.sh](scripts/cae_base_800e.sh) (32 GPUs). 
 
 ### Fine-tuning
 - Please refer to [scripts/cae_base_finetune.sh](scripts/cae_base_finetune.sh) (32 GPUs). 

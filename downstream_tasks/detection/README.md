@@ -42,6 +42,23 @@ python -m torch.distributed.launch --nproc_per_node=8 \
     ${@:6}
 ```
 
+- To train ViT-L/16 with Mask R-CNN as the task layer, run:
+```bash
+python -m torch.distributed.launch --nproc_per_node=8 \
+    --nnodes=$NNODES \
+    --node_rank=$RANK \
+    --master_addr=$ADDRESS \
+    --master_port=$PORT \
+    evaluation/object_detection/train.py evaluation/object_detection/configs/mask_rcnn/vit_large_giou_4conv1f_coco_maskrcnn_1x_cae_sincos_init0.1_lr00002_lrdr0.85_dp0.2.py \
+    --launcher pytorch \
+    --work-dir $OUTPUT_DIR \
+    --no-validate \
+    --deterministic \
+    --cfg-options model.backbone.use_checkpoint=True \
+	model.pretrained=$PRETRAINED \
+    ${@:6}
+```
+
 - To evaluate Mask R-CNN, run:
 ```bash
 python -m torch.distributed.launch --nproc_per_node=8 \
@@ -57,9 +74,11 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 ## Results (pretrined models are trained on ImageNet-1K without label)
 | Backbone | #Pretrained Epoch | Object Det | Instance Seg |
 | -------- | ----------------- | ---------- | ------------ |
-| ViT-B    | 300               | 48.5       | 42.7         |
-| ViT-B    | 800               | 49.7       | 43.9         |
-| ViT-B    | 1600              | 50.1       | 44.0         |
+| ViT-B    | 300               | 48.3       | 42.7         |
+| ViT-B    | 800               | 49.9       | 43.9         |
+| ViT-B    | 1600              | 50.3       | 44.2         |
+| ViT-L    | 1600              | 54.5       | 47.5         |
+
 
 ## Acknowledgement
 
