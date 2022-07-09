@@ -9,7 +9,6 @@ This is a PyTorch implementation of [CAE: Context AutoEncoder for Self-Supervise
 ## Highlights
 
 - State-of-the-art MIM performance. Results in the paper are successfully reproduced.
-- ViT-Large is in progress.
 
 ## Installation
 
@@ -106,7 +105,7 @@ Here provides the results of CAE-base/CAE-large for these evaluation tasks:
 - Semantic segmentation
 - Object detection and instance segmentation
 
-Pretrained weights are available ([Google Drive](https://drive.google.com/drive/folders/1wwhg7nj2GQuU9uthVuQLkEEXEjx90G7g?usp=sharing)). *: from CAE paper.
+Pretrained weights and logs are available ([Google Drive](https://drive.google.com/drive/folders/1wwhg7nj2GQuU9uthVuQLkEEXEjx90G7g?usp=sharing)). *: from CAE paper.
 
 | Model      | Pretraining data | #Epoch | Linear | Attentive | Fine-tuning | ADE Seg | COCO Det | COCO InstSeg |
 | ---------- | ---------------- | ------ | ------ | --------- | ----------- | ------- | -------- | ------------ |
