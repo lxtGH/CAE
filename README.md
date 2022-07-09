@@ -95,9 +95,11 @@ OMP_NUM_THREADS=1 $PYTHON -m torch.distributed.launch \
 
 Warmup epochs for 300/800/1600 epochs pretraining are 10/20/40.
 
+For CAE-large, please refer to [scripts/cae_large_1600e.sh](scripts/cae_large_1600e.sh). 
+
 
 ## Results
-Here provides the results of CAE-base for these evaluation tasks:
+Here provides the results of CAE-base/CAE-large for these evaluation tasks:
 - Linear probing
 - Attentive probing
 - Fine-tuning
@@ -106,23 +108,28 @@ Here provides the results of CAE-base for these evaluation tasks:
 
 Pretrained weights are available ([Google Drive](https://drive.google.com/drive/folders/1wwhg7nj2GQuU9uthVuQLkEEXEjx90G7g?usp=sharing)). *: from CAE paper.
 
-| Model     | Pretraining data | #Epoch | Linear | Attentive | Fine-tuning | ADE Seg | COCO Det | COCO InstSeg |
-| --------- | ---------------- | ------ | ------ | --------- | ----------- | ------- | -------- | ------------ |
-| MAE-base* | ImageNet-1K      | 1600   | 67.8   | 74.2      | 83.6        | 48.1    | 48.4     | 42.6         |
-| CAE-base  | ImageNet-1K      | 300    | 64.5   | 74.0      | 83.6        | 48.1    | 48.3     | 42.7         |
-| CAE-base  | ImageNet-1K      | 800    | 68.9   | 75.9      | 83.8        | 49.7    | 49.9     | 43.9         |
-| CAE-base  | ImageNet-1K      | 1600   | 70.3   | 77.2      | 83.9        | 50.3    | 50.3     | 44.2         |
+| Model      | Pretraining data | #Epoch | Linear | Attentive | Fine-tuning | ADE Seg | COCO Det | COCO InstSeg |
+| ---------- | ---------------- | ------ | ------ | --------- | ----------- | ------- | -------- | ------------ |
+| MAE-base*  | ImageNet-1K      | 1600   | 67.8   | 74.2      | 83.6        | 48.1    | 48.4     | 42.6         |
+| MAE-large* | ImageNet-1K      | 1600   | 76.0   | 78.8      | 86.0        | 53.6    | 54.0     | 47.1         |
+| CAE-base   | ImageNet-1K      | 300    | 64.5   | 74.0      | 83.6        | 48.1    | 48.3     | 42.7         |
+| CAE-base   | ImageNet-1K      | 800    | 68.9   | 75.9      | 83.8        | 49.7    | 49.9     | 43.9         |
+| CAE-base   | ImageNet-1K      | 1600   | 70.3   | 77.2      | 83.9        | 50.3    | 50.3     | 44.2         |
+| CAE-large  | ImageNet-1K      | 1600   | 77.8   | 81.2      | 86.2        | 54.9    | 54.5     | 47.5         |
 
 
 ### Linear Probing
 - Please refer to [scripts/cae_base_800e.sh](scripts/cae_base_800e.sh) (32 GPUs).  
+- For CAE-large, just replace `--model cae_base_patch16_224` with `--model cae_large_patch16_224`.
 
 ### Attentive Probing
 
 - Please refer to [scripts/cae_base_800e.sh](scripts/cae_base_800e.sh) (32 GPUs). 
+- For CAE-large, just replace `--model cae_base_patch16_224` with `--model cae_large_patch16_224`.
 
 ### Fine-tuning
 - Please refer to [scripts/cae_base_finetune.sh](scripts/cae_base_finetune.sh) (32 GPUs). 
+- For CAE-large, please refer to [scripts/cae_large_finetune.sh](scripts/cae_large_finetune.sh) (32 GPUs).
 
 ### Segmentation & Detection
 - Please refer to [downstream_tasks](./downstream_tasks) dir to get started.
