@@ -105,7 +105,7 @@ Here provides the results of CAE-base/CAE-large for these evaluation tasks:
 - Semantic segmentation
 - Object detection and instance segmentation
 
-Pretrained weights and logs are available ([Google Drive](https://drive.google.com/drive/folders/1wwhg7nj2GQuU9uthVuQLkEEXEjx90G7g?usp=sharing)). *: from CAE paper.
+Pretrained weights and logs are available ([Google Drive](https://drive.google.com/drive/folders/1wwhg7nj2GQuU9uthVuQLkEEXEjx90G7g?usp=sharing), [Baidu Cloud [Code: 4kil]](https://pan.baidu.com/s/15eZGoI72iLupLrOHqmOM9w)). *: from CAE paper.
 
 | Model      | Pretraining data | #Epoch | Linear | Attentive | Fine-tuning | ADE Seg | COCO Det | COCO InstSeg |
 | ---------- | ---------------- | ------ | ------ | --------- | ----------- | ------- | -------- | ------------ |
