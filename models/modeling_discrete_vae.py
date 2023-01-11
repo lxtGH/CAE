@@ -225,8 +225,8 @@ class Dalle_VAE(BasicVAE):
         self.image_size = image_size
 
     def load_model(self, model_dir, device):
-        self.encoder = load_model(os.path.join(model_dir, "encoder.pkl"), device)
-        self.decoder = load_model(os.path.join(model_dir, "decoder.pkl"), device)
+        self.encoder = load_model(os.path.join(model_dir, "encoder.pkl.1"), device)
+        self.decoder = load_model(os.path.join(model_dir, "decoder.pkl.1"), device)
 
     def decode(self, img_seq):
         bsz = img_seq.size()[0]
